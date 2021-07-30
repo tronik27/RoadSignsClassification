@@ -1,2 +1,2 @@
 # RoadSignsClassification
-Implementation of a neural network for classifying a road sign image dataset
+Implementation of a neural network for classifying a road signs image dataset
