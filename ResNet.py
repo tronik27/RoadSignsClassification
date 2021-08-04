@@ -4,8 +4,6 @@ from tensorflow.keras.layers import Reshape, Layer, BatchNormalization, Conv2D, 
     GlobalAveragePooling2D, Activation, Input, MaxPooling2D, Flatten
 from tensorflow.keras.models import Model
 import tensorflow as tf
-from Correlation.Correlation_utils import PlotCrossCorrelation
-import tensorflow_addons as tfa
 import numpy as np
 import keras2onnx
 
@@ -181,19 +179,6 @@ class CustomModel(Model):
         self.compiled_metrics.update_state(y_true, pred_correlation)
         return {m.name: m.result() for m in self.metrics}
 
-    def get_correlation_filter(self):
-        cf = self([tf.random.normal(shape=(1, 100)), tf.random.normal(shape=(1, 100, 100, 1))], training=False)[0]
-        return cf[0, :, :, 0].numpy()
-
-    def plot_output_correlations(self, data):
-        input_data, ground_truth, _ = data
-        initial_filter_matrix, images = input_data[0], input_data[1]
-        correlations = self([initial_filter_matrix, images], training=False)[0]
-        # labels = ground_truth[:, images.shape[1] // 2, images.shape[2] // 2, 0]
-        # print(np.shape(ground_truth))
-        labels = ground_truth[1]
-        PlotCrossCorrelation(corr_scenes=correlations, labels=labels).plot()
-
 
 class NNCFModel:
     def __init__(self, input_shape: [Tuple[int, int, int], Tuple[int, int, int]], num_classes: int, num_filters: int,
@@ -258,51 +243,9 @@ class NNCFModel:
         return Model(inputs=[inputs_1, inputs_2], outputs=[x, cf])
 
 
-class GenerativeNNCFModel:
-    def __init__(self, input_shape: [Tuple[int, int, int], Tuple[int, int, int]], num_filters: int,
-                 regularization: Optional[float], input_name: str, nn_depth: int):
-        """
-        Custom implementation of the DC generator for cf synthesis task.
-        :param input_shape: input shape (height, width, channels).
-        :param regularization: pass float < 1 (good is 0.0005) to make regularization or None to ignore it.
-        :param input_name: name of the input tensor.
-        :param nn_depth: number of deconvolution layers.
-        :param num_filters: network expansion factor, determines the number of filters in start layer.
-        """
-        self.init_filters = num_filters
-        self.input_shape = input_shape
-        self.input_name = input_name
-        self.nn_depth = nn_depth
-        self.start_size = (input_shape[1][0] // 2 ** nn_depth, input_shape[1][1] // 2 ** nn_depth,
-                           num_filters * 2 ** nn_depth)
-        self.model_path = 'gcfnn.h5'
-        self.ker_reg = None if regularization is None else tf.keras.regularizers.l2(regularization)
-
-    def build(self) -> tf.keras.models.Model:
-        """
-        Building CNN model for cf synthesis task.
-        :return: CustomModel() object.
-        """
-        inputs_1 = Input(shape=(100,), name=self.input_name)
-
-        x = Dense(self.start_size[0] * self.start_size[1] * self.start_size[2], use_bias=False)(inputs_1)
-        x = BatchNormalization()(x)
-        x = LeakyReLU()(x)
-        x = Reshape(self.start_size)(x)
-
-        for i in range(self.nn_depth - 1, -1, -1):
-            x = DeconvolutionBlock(num_filters=self.init_filters * 2 ** i, filter_size=5, strides=2)(x)
-
-        cf = Conv2D(1, (5, 5), activation='linear', padding='same', name='Correlation_Filter')(x)
-
-        inputs_2 = Input(shape=self.input_shape[1], name='Train images')
-        x = CrossCorrelation()([cf, inputs_2])
-        return Model(inputs=[inputs_1, inputs_2], outputs=[x, cf])
-
-
-tf.keras.backend.set_learning_phase(0)
-a = 48
-model = GenerativeNNCFModel(input_shape=[(1, 100), (a, a, 1)], num_filters=16, nn_depth=4,
-                            regularization=0.0005, input_name='noise vector').build()
-print(model.summary())
-model.save('nncf_model1.h5')
+# tf.keras.backend.set_learning_phase(0)
+# a = 48
+# model = NNCFModel(input_shape=[(1, 100), (a, a, 1)], num_filters=16, nn_depth=4,
+#                   regularization=0.0005, input_name='noise vector').build()
+# print(model.summary())
+# model.save('nncf_model1.h5')
