@@ -1,11 +1,9 @@
 import os
-# Dataset parameters.
-TRAIN_IMAGES_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/train'
-TRAIN_LABELS_PATH= 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/gt_train.csv'
-VALIDATION_IMAGES_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/test'
-VALIDATION_LABELS_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/gt_test.csv'
-TEST_IMAGES_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/test'
-TEST_LABELS_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classification/rtsd-r1/gt_test.csv'
+# Paths to data.
+PATH = 'E:/DATASETS/German road signs classification'
+TRAIN_DF_NAME = 'Train.csv'
+TEST_DF_NAME = 'Test.csv'
+META_DF_NAME = 'Meta.csv'
 
 
 # Paths to data, saved logs and weights.
@@ -18,27 +16,38 @@ TEST_LABELS_PATH = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/Russian road signs classifi
 # Training parameters.
 BATCH_SIZE = 32
 LEARNING_RATE = 0.0005
-NUM_EPOCHS = 100
+NUM_EPOCHS = 1
 
 # Custom model parameters.
-ALPHA = 1.0
 REGULARIZATION = 0.0005
 ACTIVATION_TYPE = 'leaky'
+NUM_FILTERS = 32
 
-MODEL_TYPE = 'custom_resnet18'
+MODEL_NAME = 'small_image_net10'
 
-NUM_CLASSES = 67
+NUM_CLASSES = 43
 INPUT_SHAPE = (48, 48, 3)
 INPUT_NAME = 'input'
 OUTPUT_NAME = 'output'
 
+CLASS_NAMES = ['Speed limit (20km/h)', 'Speed limit (30km/h)', 'Speed limit (50km/h)', 'Speed limit (60km/h)',
+               'Speed limit (70km/h)', 'Speed limit (80km/h)', 'End of speed limit (80km/h)', 'Speed limit (100km/h)',
+               'Speed limit (120km/h)', 'No passing', 'No passing veh over 3.5 tons', 'Right-of-way at intersection',
+               'Priority road', 'Yield', 'Stop', 'No vehicles', 'Veh > 3.5 tons prohibited', 'No entry',
+               'General caution', 'Dangerous curve left', 'Dangerous curve right', 'Double curve', 'Bumpy road',
+               'Slippery road', 'Road narrows on the right', 'Road work', 'Traffic signals', 'Pedestrians',
+               'Children crossing', 'Bicycles crossing', 'Beware of ice/snow ', 'Wild animals crossing',
+               'End speed + passing limits', 'Turn right ahead', 'Turn left ahead', 'Ahead only',
+               'Go straight or right', 'Go straight or left', 'Keep right', 'Keep left', 'Roundabout mandatory',
+               'End of no passing', 'End no passing veh > 3.5 tons']
+CLASS_NAMES = []
 # augmentation configuration
-AUG_CONFIG = {'flip': None, 'rotation': (-0.1, 0.1), 'crop': 0.9, 'translation': None,
-              'zoom': 0.2, 'saturation': (0.5, 1.0), 'hue': 0.1, 'brightness': (0.3, 1.0), 'noise': 0.45, 'blur': 3.0,
-              'contrast': 0.7, 'target_size': (48, 48)}
+AUG_CONFIG = ['crop', 'rotate', 'sharpen', 'rgb_shift', 'brightness_contrast', 'hue_saturation',
+              'distortion', 'blur', 'noise']
+# AUG_CONFIG = []
 # metrics configuration
-# METRIC_NAMES = ['accuracy', 'precision', 'recall', 'f1']
-METRIC_NAMES = ['accuracy', 'precision', 'recall']
+METRIC_NAMES = ['categorical_accuracy', 'precision']
 # service parameters
 APPLY_SAMPLE_WEIGHT = True
-SHOW_LEARNING_CURVES = True
+SHOW_LEARNING_CURVES = False
+SHOW_DATASET_INFO = False
