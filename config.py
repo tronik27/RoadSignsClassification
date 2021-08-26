@@ -1,4 +1,3 @@
-import os
 # Paths to data.
 PATH = 'E:/DATASETS/German road signs classification'
 TRAIN_DF_NAME = 'Train.csv'
@@ -20,7 +19,6 @@ NUM_EPOCHS = 35
 
 # Custom model parameters.
 REGULARIZATION = 0.0005
-ACTIVATION_TYPE = 'leaky'
 NUM_FILTERS = 16
 
 MODEL_NAME = 'small_image_net10'
