@@ -88,3 +88,9 @@ Examples of image classification by model:
 ## Using script
 
 If you want to train/evaluate or save the model by yourself, then use the code presented in **main.py**. The main parameters used in the code are specified in the file **config.py**. For image classification by pretrained model use **test.py**. The trained model is stored in the folder **trained_model/small_image_net10**. Below are examples of image classification by the trained model:
+
+![img5.png](images/img5.PNG)
+
+![img6.png](images/img6.PNG)
+
+![img7.png](images/img7.PNG)
