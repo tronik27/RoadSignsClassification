@@ -1,7 +1,7 @@
 from train_and_evaluate import RoadSignsClassification
 from config import BATCH_SIZE, INPUT_SHAPE, METRIC_NAMES, NUM_CLASSES, PATH, NUM_FILTERS, LEARNING_RATE, MODEL_NAME,\
-    TRAIN_DF_NAME, TEST_DF_NAME, REGULARIZATION, NUM_EPOCHS, AUG_CONFIG, APPLY_SAMPLE_WEIGHT, META_DF_NAME,\
-    SHOW_LEARNING_CURVES, CLASS_NAMES, SHOW_DATASET_INFO
+    TRAIN_DF_NAME, TEST_DF_NAME, REGULARIZATION, NUM_EPOCHS, AUG_CONFIG, APPLY_SAMPLE_WEIGHT, META_DF_NAME, MODEL_PATH,\
+    SHOW_LEARNING_CURVES, CLASS_NAMES, SHOW_DATASET_INFO, SHOW_IMAGE_DATA, INPUT_NAME, OUTPUT_NAME, WEIGHTS_PATH
 
 
 def main():
@@ -15,7 +15,10 @@ def main():
         learning_rate=LEARNING_RATE,
         regularization=REGULARIZATION,
         model_name=MODEL_NAME,
-        class_names=CLASS_NAMES
+        class_names=CLASS_NAMES,
+        input_name=INPUT_NAME,
+        output_name=OUTPUT_NAME,
+        path_to_model_weights=WEIGHTS_PATH
     )
     # Training classifier
     classifier.train(
@@ -29,12 +32,12 @@ def main():
         show_dataset_info=SHOW_DATASET_INFO
     )
     #  Saving trained classifier model
-    classifier.save_model(path_to_save='trained_model_1')
+    classifier.save_model(path_to_save=MODEL_PATH)
     #  Testing classifier
     classifier.evaluate(
         path=PATH,
         file_name=TEST_DF_NAME,
-        show_image_data=True
+        show_image_data=SHOW_IMAGE_DATA
     )
 
 

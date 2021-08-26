@@ -22,10 +22,10 @@ class RoadSignsClassification:
                  regularization: Optional[float],
                  model_name: str,
                  class_names: list,
-                 input_name: str = 'input',
-                 output_name: str = 'output',
-                 num_filters: int = 32,
-                 learning_rate: float = 0.001,
+                 input_name: str,
+                 output_name: str,
+                 num_filters: int,
+                 learning_rate: float,
                  path_to_model_weights: str = 'road_signs_model/weights') -> None:
         """
         Road signs classifier class.
@@ -141,7 +141,7 @@ class RoadSignsClassification:
         print('[INFO] evaluating network...')
         results = self.nn.evaluate(test_datagen, batch_size=self.batch_size, verbose=0, use_multiprocessing=True)
         for i, metric in enumerate(self.nn.metrics_names):
-            print('{}: {:.03f}%'.format(metric, results[i] * 100))
+            print('{}: {:.03f}'.format(metric, results[i]))
         self.__evaluation_report(test_datagen)
         if show_image_data:
             self.__show_image_data(test_datagen)

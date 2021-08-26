@@ -1,14 +1,13 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
-from multiprocessing import cpu_count
 import time
 import os
-from typing import Tuple, Optional
+from typing import Tuple
 import cv2
 from tensorflow_addons.metrics import F1Score
-from config import CLASS_NAMES
 import albumentations as aug
+from config import MODEL_PATH, CLASS_NAMES, WORK_DATA_PATH, INPUT_SHAPE
 
 
 class DataGen(tf.keras.utils.Sequence):
@@ -130,11 +129,14 @@ class RSCWork:
             plt.close('all')
 
 
-data = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/German road signs classification/Train'
-# data = r'E:\DATASETS\Russian road signs classification\rtsd-r1\test'
-model = 'D:/Resume/Classification/RoadSignsClassification/trained_model/small_image_net10'
-classifier = RSCWork(path_to_model=model, path_to_data=data, target_size=(48, 48, 3))
-pred = classifier.predict(batch_size=1024)
-print(len(pred))
-print(pred)
-# classifier.predict_and_show(class_names=CLASS_NAMES)
+if __name__ == '__main__':
+    #  Creating the road signs classifier
+    classifier = RSCWork(
+        path_to_model=MODEL_PATH,
+        path_to_data=WORK_DATA_PATH,
+        target_size=INPUT_SHAPE
+    )
+    #  Getting predictions for images (use this method if you want to quickly classify a large number of images)
+    pred = classifier.predict(batch_size=1024)
+    #  Getting predictions for images (use this method if you want to see examples of image classification)
+    classifier.predict_and_show(class_names=CLASS_NAMES)

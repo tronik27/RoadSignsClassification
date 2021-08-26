@@ -170,15 +170,3 @@ class CustomDataGen(tf.keras.utils.Sequence):
         sns_plot.grid(color='coral', linestyle='--', linewidth=0.5, axis='y')
         sns_plot.set_xticks(np.arange(0, self.num_classes, 3))
         plt.show()
-
-
-# data = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/German road signs classification/Train.csv'
-# metadata_path = 'D:/MIFI/SCIENTIFIC WORK/DATASETS/German road signs classification/Meta.csv'
-# AUG_CONF = ['crop', 'rotate', 'sharpen', 'rgb_shift', 'brightness_contrast', 'hue_saturation',
-#             'blur', 'noise']
-# datagen = CustomDataGen(data_path=data, batch_size=32, target_size=(48, 48, 3),
-#                         aug_config=AUG_CONF, apply_weights=True)
-# datagen.show_image_data(num_of_images=8, meta_path=metadata_path)
-# # datagen.dataset_info()
-# x, y, w = datagen[100]
-# print(x.shape, y.shape, w)
