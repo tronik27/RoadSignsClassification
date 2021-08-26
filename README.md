@@ -23,11 +23,11 @@ When training a model, images for training are split into training and validatio
 ## Testing
 This section presents the results of the trained model obtained on the test set: 
 
-Loss: 0.136
+*Loss: 0.13592;*
 
-Categorical accuracy: 98.779%
+*Categorical accuracy: 98.779%;*
 
-F1 score: 98.780%
+*F1 score: 98.780%;*
 
 Classification report:
 ```
