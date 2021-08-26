@@ -88,7 +88,7 @@ class CustomDataGen(tf.keras.utils.Sequence):
         preprocessed_image = aug.Compose(
             [aug.CLAHE(tile_grid_size=(10, 10), always_apply=True, clip_limit=1.0)]
         )(image=image)['image']
-        return preprocessed_image
+        return preprocessed_image / 255
 
     def __get_labels(self, labels: np.ndarray) -> np.ndarray:
         """

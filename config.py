@@ -15,13 +15,13 @@ META_DF_NAME = 'Meta.csv'
 
 # Training parameters.
 BATCH_SIZE = 32
-LEARNING_RATE = 0.0005
-NUM_EPOCHS = 1
+LEARNING_RATE = 0.001
+NUM_EPOCHS = 35
 
 # Custom model parameters.
 REGULARIZATION = 0.0005
 ACTIVATION_TYPE = 'leaky'
-NUM_FILTERS = 32
+NUM_FILTERS = 16
 
 MODEL_NAME = 'small_image_net10'
 
@@ -40,14 +40,14 @@ CLASS_NAMES = ['Speed limit (20km/h)', 'Speed limit (30km/h)', 'Speed limit (50k
                'End speed + passing limits', 'Turn right ahead', 'Turn left ahead', 'Ahead only',
                'Go straight or right', 'Go straight or left', 'Keep right', 'Keep left', 'Roundabout mandatory',
                'End of no passing', 'End no passing veh > 3.5 tons']
-CLASS_NAMES = []
+
 # augmentation configuration
 AUG_CONFIG = ['crop', 'rotate', 'sharpen', 'rgb_shift', 'brightness_contrast', 'hue_saturation',
               'distortion', 'blur', 'noise']
 # AUG_CONFIG = []
 # metrics configuration
-METRIC_NAMES = ['categorical_accuracy', 'precision']
+METRIC_NAMES = ['categorical_accuracy', 'f1_score']
 # service parameters
 APPLY_SAMPLE_WEIGHT = True
-SHOW_LEARNING_CURVES = False
-SHOW_DATASET_INFO = False
+SHOW_LEARNING_CURVES = True
+SHOW_DATASET_INFO = True

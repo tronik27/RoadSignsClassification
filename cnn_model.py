@@ -16,6 +16,7 @@ class SmallImageNet:
         :param num_filters: network expansion factor, determines the number of filters in start layer.
         :param regularization: pass float < 1 (good is 0.0005) to make regularization or None to ignore it.
         :param input_name: name of the input tensor.
+        :param output_name: name of the output tensor.
         """
         self.input_shape = input_shape
         self.num_classes = num_classes
@@ -35,11 +36,11 @@ class SmallImageNet:
         x = BatchNormalization()(x)
         x = LeakyReLU()(x)
         x = MaxPooling2D((2, 2), strides=1)(x)
-        x = self.conv_res_block(x, self.init_filters * 2)
-        x = self.conv_res_block(x, self.init_filters * 2)
-        x = Dropout(0.1)(x)
-        x = self.conv_res_block(x, self.init_filters * 2 ** 2, res=True)
-        x = self.conv_res_block(x, self.init_filters * 2 ** 2, res=True)
+
+        x = self.conv_res_block(x, self.init_filters * 2, res=True)
+        x = self.conv_res_block(x, self.init_filters * 4, res=True)
+        x = self.conv_res_block(x, self.init_filters * 8, res=True)
+        x = self.conv_res_block(x, self.init_filters * 16, res=True)
         x = GlobalAveragePooling2D()(x)
         x = Dense(self.num_classes, kernel_regularizer=self.ker_reg, activation='softmax', name=self.output_name)(x)
 

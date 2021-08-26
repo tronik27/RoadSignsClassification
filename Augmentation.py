@@ -2,11 +2,12 @@ import albumentations as aug
 from typing import Tuple
 
 
-def image_augmentation(config: list, target_shape: Tuple[int, int, int]):
+def image_augmentation(config: list, target_shape: Tuple[int, int, int]) -> aug.core.composition.Compose:
     """
-    Adds gaussian blur to images.
+    Method for creating a list of transforms according to the configuration.
     :param config: list with a set of parameters for augmentation.
     :param target_shape: tuple with input shape of image.
+    :return: composed transforms.
     """
     augmentation_list = []
     augmentations = {'vertical_flip': aug.VerticalFlip(),
