@@ -15,7 +15,7 @@ META_DF_NAME = 'Meta.csv'
 
 # Training parameters.
 BATCH_SIZE = 32
-LEARNING_RATE = 0.001
+LEARNING_RATE = 0.0005
 NUM_EPOCHS = 35
 
 # Custom model parameters.
