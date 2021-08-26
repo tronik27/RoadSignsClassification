@@ -1,12 +1,10 @@
 import os
 # Paths to data.
-# PATH = 'path/to/folder/containing/dataset'
-PATH = 'E:/DATASETS/German road signs classification'
+PATH = 'path/to/folder/containing/dataset'
 TRAIN_DF_NAME = 'Train.csv'
 TEST_DF_NAME = 'Test.csv'
 META_DF_NAME = 'Meta.csv'
-# WORK_DATA_PATH = 'path/to/folder/containing/images/for/classification'
-WORK_DATA_PATH = r'E:\DATASETS\Russian road signs classification\rtsd-r1\test'
+WORK_DATA_PATH = 'path/to/folder/containing/images/for/classification'
 
 # Training parameters.
 BATCH_SIZE = 32
