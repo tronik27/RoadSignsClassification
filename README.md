@@ -5,7 +5,7 @@ This repository contains the implementation of the road sign classifier. The Ger
 
 ![img3.png](images/img3.PNG)
 
-'''
+```
 ├───Meta
 ├───Test
 └───Train
@@ -14,7 +14,7 @@ This repository contains the implementation of the road sign classifier. The Ger
    ...
     ├───41
     └───42
-'''
+```
 ![img1.png](images/img1.PNG)
 
 ![img4.png](images/img4.PNG)
