@@ -84,3 +84,7 @@ End no passing veh > 3.5 tons       1.00      0.87      0.93        89
 Examples of image classification by model:
 
 ![img4.png](images/img4.PNG)
+
+## Using script
+
+If you want to train/evaluate or save the model by yourself, then use the code presented in **main.py**. The main parameters used in the code are specified in the file **config.py**. For image classification by pretrained model use **test.py**. The trained model is stored in the folder **trained_model/small_image_net10**. Below are examples of image classification by the trained model:
