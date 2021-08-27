@@ -139,4 +139,4 @@ if __name__ == '__main__':
     #  Getting predictions for images (use this method if you want to quickly classify a large number of images)
     pred = classifier.predict(batch_size=1024)
     #  Getting predictions for images (use this method if you want to see examples of image classification)
-    # classifier.predict_and_show(class_names=CLASS_NAMES)
+    classifier.predict_and_show(class_names=CLASS_NAMES)
