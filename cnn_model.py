@@ -1,5 +1,5 @@
 from typing import Tuple, Optional
-from tensorflow.keras.layers import BatchNormalization, Conv2D, Dense, LeakyReLU, Add, Dropout, \
+from tensorflow.keras.layers import BatchNormalization, Conv2D, Dense, LeakyReLU, Add, \
     GlobalAveragePooling2D, Input, MaxPooling2D
 from tensorflow.keras.models import Model
 import tensorflow as tf
